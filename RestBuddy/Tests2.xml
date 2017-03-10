@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!--
+		Http Status Codes
+		200 - OK
+		201 - Created
+		400 - Bad Request
+		401 - Unauthorized
+		404 - Not Found
+		500 - Internal Server Error
+	-->
+  <baseuri>http://localhost/Logos.WebApi/</baseuri>
+  <authkey>name</authkey>
+  <authvalue>password</authvalue>
+  <output>application/xml</output>
+  <includeauthcred>True</includeauthcred>
+  <includelogoscred>True</includelogoscred>
+  <tests>    
+    <test active="True">
+      <name>GetWorkOrderByCreatedDate</name>
+      <endpoint>api/UM/V1/WorkOrder/CreatedDate/20170201T1420</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>   
+	<test active="False">
+      <name>PostWorkOrderResultXML- EL ATTACH</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000147</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+				<WorkOrderResult>
+				<WorkOrderNumber>2017-00000147</WorkOrderNumber>
+				<WorkOrderReferenceId>WO00000147</WorkOrderReferenceId>
+				<WorkOrderType>EL CHANGE OUT</WorkOrderType>
+				<MeterNumber>23031</MeterNumber>
+				<CompletedDate>2017-03-02</CompletedDate>
+				<ReadDate>2017-03-02</ReadDate>
+				<ReadType>Manual</ReadType>
+				<NewMeter>
+							<MeterNumber>WOD40</MeterNumber>
+							<MeterType>EL Smart 5 Dial X1</MeterType>
+							<NewRoute></NewRoute>
+							<NewSequence></NewSequence>
+							<NewMeterServices>
+								<NewMeterService>
+										<ServiceType>Electric</ServiceType>
+								</NewMeterService>
+							</NewMeterServices>							
+							<NewMeterRates>
+								<NewMeterRate>
+										<Rate></Rate> 
+								</NewMeterRate>
+							</NewMeterRates>
+							<NewMeterMeasurements>
+								<NewMeterMeasurement>
+										<MeterMeasurementType>Electric Reading</MeterMeasurementType>
+										<MeterInitialSetting>1050</MeterInitialSetting>
+								</NewMeterMeasurement>
+							</NewMeterMeasurements>
+							<RemoteNumbers>1234567</RemoteNumbers>
+							<AmrCode>AmrCo</AmrCode>
+							<AmrTestCircle>AmrTestCricle</AmrTestCircle>
+							<CommuncationIdentifier>Comm Identifer</CommuncationIdentifier>
+				</NewMeter>
+				<CompletedByCode>127</CompletedByCode>
+				<Canceled>true</Canceled>				
+				<ResultCode>Cancelled</ResultCode>
+        </WorkOrderResult>
+				]]>
+      </body>
+    </test>
+    <test active="False">
+      <name>PostWorkOrderResultJSON-EL CHANGE OUT</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000139</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+				
+           {
+            "WorkOrderNumber": "2017-00000139",
+            "WorkOrderReferenceId": "WO00000139",
+            "WorkOrderType": "EL CHANGE OUT",
+			"MeterNumber": "WOD56",
+            "CompletedDate": "2017-02-28",
+            "ReadDate": "2017-02-28",
+            "ReadType": "Manual",
+            "NewMeter": {
+				"MeterNumber": "WOD57",
+				"MeterType": "EL Smart 5 Dial X1",
+				"NewRoute": "",
+				"NewSequence": "",
+				"NewMeterServices":[
+                {"ServiceType":"Electric"}               
+                ],
+				"NewMeterRates":[
+                  
+                  ],
+              "NewMeterMeasurements":[
+                  {
+                    "MeterMeasurementType": "Electric Reading",
+                    "MeterInitialSetting": "1050"
+                  }
+                ],
+              "AmrNumber": "1234567",
+              "AmrCode": "3456",
+              "AmrTestCircle": "AmrTestCricle",
+              "CommuncationIdentifier": "Comm Identifer"
+            },
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+          }
+				]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL ATTACH</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000147</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+				
+           {
+            "WorkOrderNumber": "2017-00000147",
+            "WorkOrderReferenceId": "WO00000147",
+            "WorkOrderType": "EL NEW SERVICE",			
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Actual",
+            "NewMeter": {
+				"MeterNumber": "WOD10",
+				"MeterType": "EL Smart 5 Dial X1",
+				"NewRoute": "",
+				"NewSequence": "",
+				"NewMeterServices":[
+                {"ServiceType":"Electric"}               
+                ],
+				"NewMeterRates":[
+				{
+					"Rate": "10 EL Res"
+				}
+                  ],
+              "NewMeterMeasurements":[
+                  {
+                    "MeterMeasurementType": "Electric Reading",
+                    "MeterInitialSetting": "1050"
+                  }
+                ],
+              "AmrNumber": "1234567",
+              "AmrCode": "3456",
+              "AmrTestCircle": "AmrTestCricle",
+              "CommuncationIdentifier": "Comm Identifer"
+            },
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+          }
+				]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL - FINAL READ</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL - FINAL READ",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL SHUT OFF CUST</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL SHUT OFF CUST",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-Miscellaneous</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL SEC LIGHT",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL MOVE IN READ</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL MOVE IN READ",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL REMOVE METER</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL REMOVE METER",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                },
+				 {
+                  "MeasurementType": "Demand",
+                  "Reading": "2"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultJSON-EL TURN ON</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000145</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+			{
+            "WorkOrderNumber": "2017-00000145",
+            "WorkOrderReferenceId": "WO00000145",
+            "WorkOrderType": "EL TURN ON",
+			"MeterNumber": "40000015",
+            "CompletedDate": "2017-03-02",
+            "ReadDate": "2017-03-02",
+            "ReadType": "Manual",
+            "Measurements":[
+                {
+                  "MeasurementType": "Electric Reading",
+                  "Reading": "27000"
+                }
+              ],
+            "CompletedByCode": "127",
+            "Canceled": "true",
+            "ResultCode": "Cancelled"
+			}
+			]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultXML-EL FINAL READ</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000142</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+				<WorkOrderResult>
+				<WorkOrderNumber>2017-00000142</WorkOrderNumber>
+				<WorkOrderReferenceId>WO00000142</WorkOrderReferenceId>
+				<WorkOrderType>EL - FINAL READ</WorkOrderType>
+				<MeterNumber>WOD58</MeterNumber>
+				<CompletedDate>2017-03-01</CompletedDate>
+				<ReadDate>2017-03-01</ReadDate>
+				<ReadType>Manual Read</ReadType>
+				<Measurements>
+				<MeasurementResult>
+					<MeasurementType>Electric Reading</MeasurementType>
+					<Reading>32280</Reading>
+				</MeasurementResult>
+				</Measurements>
+				<CompletedByCode>127</CompletedByCode>
+				<Canceled>true</Canceled>				
+				<ResultCode>Cancelled</ResultCode>
+				</WorkOrderResult>
+				]]>
+      </body>
+    </test>
+	<test active="False">
+      <name>PostWorkOrderResultXML-EL MOVE IN READ</name>
+      <endpoint>api/UM/V1/WorkOrder/Complete/2017-00000144</endpoint>
+      <httpmethod>POST</httpmethod>
+      <expectedhttpcode>201</expectedhttpcode>
+      <body>
+        <![CDATA[
+				<WorkOrderResult>
+				<WorkOrderNumber>2017-00000144</WorkOrderNumber>
+				<WorkOrderReferenceId>WO00000144</WorkOrderReferenceId>
+				<WorkOrderType>EL MOVE IN READ</WorkOrderType>
+				<MeterNumber>40000015</MeterNumber>
+				<CompletedDate>2017-03-01</CompletedDate>
+				<ReadDate>2017-03-01</ReadDate>
+				<ReadType>Manual Read</ReadType>
+				<Measurements>
+				<MeasurementResult>
+					<MeasurementType>Electric Reading</MeasurementType>
+					<Reading>8600</Reading>
+				</MeasurementResult>
+				<MeasurementResult>
+					<MeasurementType>Demand</MeasurementType>
+					<Reading>750</Reading>
+				</MeasurementResult>
+				</Measurements>
+				<CompletedByCode>127</CompletedByCode>
+				<Canceled>true</Canceled>				
+				<ResultCode>Cancelled</ResultCode>
+				</WorkOrderResult>
+				]]>
+      </body>
+    </test>
+  </tests>
+</config>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!--
+		Http Status Codes
+		200 - OK
+		201 - Created
+		400 - Bad Request
+		401 - Unauthorized
+		404 - Not Found
+		500 - Internal Server Error
+	-->
+  <baseuri>https://www.google.com/</baseuri>
+  <requestusername>name</requestusername>
+  <requestpassword>password</requestpassword>
+  <output>application/xml</output>
+  <sendrequestauthcredentials>False</sendrequestauthcredentials>
+  <headers>
+    <header name="User-Agent">Mozilla/5.0</header>
+  </headers>
+  <tests>
+    <test active="True">
+      <name>UsingMasterBaseUri</name>      
+      <endpoint>search?q=hello</endpoint>
+      <httpmethod>GET</httpmethod>      
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>csharp</name>
+      <baseuri>https://csharp.2000things.com/</baseuri>
+      <endpoint>feed</endpoint>
+      <httpmethod>GET</httpmethod>
+      <headers>
+        <header name="User-Agent">Googlebot/2.1</header>
+      </headers>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Acronym</name>
+      <baseuri>http://www.nactem.ac.uk/software/</baseuri>
+      <endpoint>acromine/dictionary.py?sf=BMI</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Weather</name>
+      <baseuri>http://samples.openweathermap.org/data/2.5/</baseuri>
+      <endpoint>weather?q=London,uk&amp;appid=b1b15e88fa797225412429c1c50c122a1</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Colorado_JSON</name>
+      <baseuri>http://data.colorado.gov/resource/</baseuri>
+      <endpoint>4ykn-tg5h.json</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Colorado_XML</name>
+      <baseuri>http://data.colorado.gov/resource/</baseuri>
+      <endpoint>4ykn-tg5h.xml</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Reliply</name>
+      <baseuri>http://www.reliply.org/tools/</baseuri>
+      <endpoint>requestheaders.php</endpoint>
+      <httpmethod>GET</httpmethod>
+      <headers>
+        <header name="custom-header">Custom-header-value</header>
+      </headers>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>EricGiguere</name>
+      <baseuri>http://www.ericgiguere.com/tools/</baseuri>
+      <endpoint>http-header-viewer.html?print=true</endpoint>
+      <httpmethod>GET</httpmethod>
+      <headers>
+        <header name="custom-header">Custom-header-value</header>
+      </headers>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>Cloxy</name>
+      <baseuri>http://headers.cloxy.net/</baseuri>
+      <endpoint>request.php</endpoint>
+      <httpmethod>GET</httpmethod>
+      <headers>
+        <header name="custom-header">Custom-header-value</header>
+      </headers>      
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="False">
+      <name>Cloxy_POST</name>
+      <baseuri>http://headers.cloxy.net/</baseuri>
+      <endpoint>request.php</endpoint>
+      <httpmethod>POST</httpmethod>
+      <headers>
+        <header name="custom-header">Custom-header-value</header>
+      </headers>
+      <body>
+        <![CDATA[
+				"http://www.google.com"
+				]]>
+      </body>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>TestingFailureCondition</name>
+      <baseuri>http://1.aaa/</baseuri>
+      <endpoint>request.php</endpoint>
+      <httpmethod>GET</httpmethod>            
+      <expectedhttpcode>500</expectedhttpcode>
+    </test>
+    <test active="True">
+      <name>FailedTest</name>
+      <baseuri>http://1.aaa/</baseuri>
+      <endpoint>request.php</endpoint>
+      <httpmethod>GET</httpmethod>
+      <expectedhttpcode>200</expectedhttpcode>
+    </test>
+  </tests>
+</config>
